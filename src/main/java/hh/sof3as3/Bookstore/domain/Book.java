@@ -1,10 +1,23 @@
 package hh.sof3as3.Bookstore.domain;
 
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+
+// lisätään entity-annotaatio
+@Entity
 public class Book {
 	
 	// attribuutit
+	// generoidaan id-arvo pääavaimeksi
+	@Id
+	@GeneratedValue(strategy=GenerationType.AUTO)
+	private long id;
 	private String title;
 	private String author;
+	@Column(name="publishing_year") // year on varattu sana, joten muutetaan sarakkeen nimi
 	private int year;
 	private String isbn;
 	private double price;
