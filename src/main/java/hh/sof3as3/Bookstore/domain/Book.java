@@ -41,6 +41,10 @@ public class Book {
 	}
 	
 	// getterit ja setterit
+	// huom getId lisätty poisto- ja muokkaustoiminnallisuuksia varten
+	public Long getId() {
+		return id;
+	}
 	public String getTitle() {
 		return title;
 	}
