@@ -5,8 +5,9 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 </head>
 <body>
-	<h1>Add book</h1>
-	<form method="post" action="#" th:action="@{/addbook}" th:object="${book}">
+	<h1>Book</h1>
+	<form method="post" action="#" th:action="@{/savebook}" th:object="${book}">
+	<input type="hidden" th:field="${book.id}"/>
 	<p>Title: <input type="text" th:field="${book.title}" /></p>
 	<p>Author: <input type="text" th:field="${book.author}" /></p>
 	<p>ISBN: <input type="text" th:field="${book.isbn}" /></p>

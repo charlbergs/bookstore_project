@@ -25,7 +25,7 @@ public class BookController {
 		return "index";
 	}
 	
-	// kutsuu booklist.html:ää endpointissa /books ja näyttää tietokannan kirjat
+	// listaus, get: kutsuu booklist.html:ää ja näyttää tietokannan kirjat
 	@GetMapping("/books")
 	public String getBooklist(Model model) {
 		List<Book> books = (List<Book>) bookRepository.findAll(); // haetaan kirjat tietokannasta listalle
@@ -33,25 +33,33 @@ public class BookController {
 		return "booklist";
 	}
 	
-	// kutsuu addbook.html:ää endpointissa addbook ja näyttää kirjalisäyslomakkeen
+	// lisäys, GET: kutsuu bookform-templatea ja näyttää tyhjän lomakkeen
 	@GetMapping("/addbook")
 	public String getBookform(Model model) {
 		model.addAttribute("book", new Book()); // välitetään tyhjä kirja-olio uuden kirjan tallentamista varten
-		return "addbook";
+		return "bookform";
 	}
 	
-	// lisää uuden kirjan tiedot lomakkeelta tietokantaan
-	@PostMapping("/addbook")
+	// muokkaus, GET: kutsuu bookform-templatea ja välittää sinne id:n avulla muokattavan kirjan tiedot
+	@GetMapping("/edit/{id}")
+	public String editBook(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("book", bookRepository.findById(id).get());
+		return "bookform";
+	}
+	
+	// lisäys/muokkaus, POST: lisää kirjan tiedot lomakkeelta tietokantaan, joko muokaten olemassa olevaa tietokantariviä tai 
+	// luoden uuden rivin, riippuen siitä onko id jo olemassa
+	@PostMapping("/savebook")
 	public String sendBookform(Book book) {
 		bookRepository.save(book);
-		return "redirect:/books";
+		return "redirect:/books"; // uudelleenohjaus listausnäkymään
 	}
 	
-	// poistaa kirjan tietokannasta id:n avulla
+	// poisto, GET: poistaa kirjan tietokannasta id:n avulla
 	@GetMapping("/delete/{id}")
 	public String deleteBook(@PathVariable("id") Long id) {
 		bookRepository.deleteById(id);
-		return "redirect:/books";
+		return "redirect:/books"; // uudelleenohjaus listausnäkymään
 		
 	}
 	

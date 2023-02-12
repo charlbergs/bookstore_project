@@ -39,11 +39,23 @@ public class Book {
 		this.isbn = isbn;
 		this.price = price;
 	}
+	// parametrillinen olemassaolevan id:n kanssa (edit)
+	public Book(Long id, String title, String author, int year, String isbn, double price) {
+		this.id = id;
+		this.title = title;
+		this.author = author;
+		this.year = year;
+		this.isbn = isbn;
+		this.price = price;
+	}
 	
 	// getterit ja setterit
-	// huom getId lisätty poisto- ja muokkaustoiminnallisuuksia varten
+	// huom getId & setId lisätty poisto- ja muokkaustoiminnallisuuksia varten
 	public Long getId() {
 		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 	public String getTitle() {
 		return title;
