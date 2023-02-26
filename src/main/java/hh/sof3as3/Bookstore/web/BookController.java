@@ -37,13 +37,15 @@ public class BookController {
 	@GetMapping("/addbook")
 	public String getBookform(Model model) {
 		model.addAttribute("book", new Book()); // välitetään tyhjä kirja-olio uuden kirjan tallentamista varten
+		model.addAttribute("header", "Add new book"); // välitetään oikea otsikko lomakkeelle
 		return "bookform";
 	}
 	
 	// muokkaus, GET: kutsuu bookform-templatea ja välittää sinne id:n avulla muokattavan kirjan tiedot
 	@GetMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") Long id, Model model) {
-		model.addAttribute("book", bookRepository.findById(id).get());
+		model.addAttribute("book", bookRepository.findById(id)); // .findById().get() jos ei model.addAttributen sisällä
+		model.addAttribute("header", "Edit book"); // välitetään oikea otsikko lomakkeelle
 		return "bookform";
 	}
 	

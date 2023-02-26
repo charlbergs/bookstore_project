@@ -9,6 +9,8 @@ import org.springframework.context.annotation.Bean;
 
 import hh.sof3as3.Bookstore.domain.Book;
 import hh.sof3as3.Bookstore.domain.BookRepository;
+import hh.sof3as3.Bookstore.domain.Category;
+import hh.sof3as3.Bookstore.domain.CategoryRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -17,19 +19,38 @@ public class BookstoreApplication {
 		SpringApplication.run(BookstoreApplication.class, args);
 	}
 	
-	// luodaan CommandLineRunner joka käynnistettäessä luo dataa tietokantaan
+	// commandlinerunner: käynnistettäessä luodaan dataa tietokantaan
+	// ja testitulostetaan consoleen (kateogriat ja kirjat)
 	@Bean
-	public CommandLineRunner demo (BookRepository bookRepository) {
+	public CommandLineRunner demo (CategoryRepository categoryRepository, BookRepository bookRepository) {
 		return (args) -> {
-			Book book1 = new Book("Flow My Tears, The Policeman Said", "Philip K. Dick", 2012, "9781780220413", 8.99);
-			Book book2 = new Book("Where the Crawdads Sing", "Delia Owens", 2019, "9781472154668", 13.99);
-			bookRepository.save(book1);
-			bookRepository.save(book2);
+			
+			// kategoriat
+			categoryRepository.save(new Category("Scifi"));
+			categoryRepository.save(new Category("Mystery"));
+			categoryRepository.save(new Category("Short story"));
+			
+			// kirjat
+			bookRepository.save(new Book("Flow My Tears, The Policeman Said", "Philip K. Dick", 2012, "9781780220413", 8.99));
+			bookRepository.save(new Book("Altered Carbon", "Richard Morgan", 2008, "9780575081246", 10.49));
+			bookRepository.save(new Book("Where the Crawdads Sing", "Delia Owens", 2019, "9781472154668", 13.99));
+			bookRepository.save(new Book("Gone Girl", "Gillian Flynn", 2013, "9780753827666", 11.00));
+			bookRepository.save(new Book("The First Forty-Nine Stories", "Ernest Hemingway", 1995, "9780099339212", 14.29));
+			
 			// testitulostus consoleen
+			System.out.println("------------");
+			System.out.println("Categories:");
+			List<Category> categories = (List<Category>) categoryRepository.findAll();
+			for (Category category: categories) {
+				System.out.println(category.toString());
+			}
+			System.out.println("------------");
+			System.out.println("Books:");
 			List<Book> books = (List<Book>) bookRepository.findAll();
 			for (Book book : books) {
 				System.out.println(book.toString());
 			}
+			System.out.println();
 		};
 	}
 	
