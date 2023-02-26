@@ -7,13 +7,17 @@
 <body>
 	<h1 th:text="${header}"></h1>
 	<form method="post" action="#" th:action="@{/savebook}" th:object="${book}">
-	<input type="hidden" th:field="${book.id}"/>
-	<p>Title: <input type="text" th:field="${book.title}" /></p>
-	<p>Author: <input type="text" th:field="${book.author}" /></p>
-	<p>ISBN: <input type="text" th:field="${book.isbn}" /></p>
-	<p>Publishing year: <input type="number" min="0" max="9999" th:field="${book.year}" /></p>
-	<p>Price: <input type="text" size="4" th:field="${book.price}" /></p>
-	<input type="submit" value="Save"/> <input type="reset" value="Reset" />
+		<input type="hidden" th:field="${book.id}"/>
+		<p>Title: <input type="text" th:field="${book.title}" /></p>
+		<p>Author: <input type="text" th:field="${book.author}" /></p>
+		<p>ISBN: <input type="text" th:field="${book.isbn}" /></p>
+		<p>Publishing year: <input type="number" min="0" max="9999" th:field="${book.year}" /></p>
+		<p>Price: <input type="text" size="4" th:field="${book.price}" /></p>
+		<label for="categorylist">Category</label>
+		<select id="categorylist" th:field="*{category}">
+       		<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
+    	</select>
+		<input type="submit" value="Save"/> <input type="reset" value="Reset" />
 	</form>
 	
 </body>

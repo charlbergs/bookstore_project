@@ -11,13 +11,16 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import hh.sof3as3.Bookstore.domain.Book;
 import hh.sof3as3.Bookstore.domain.BookRepository;
+import hh.sof3as3.Bookstore.domain.CategoryRepository;
 
 @Controller
 public class BookController {
 	
-	// esitellään repositorio
+	// esitellään repositoriot
 	@Autowired
 	private BookRepository bookRepository;
+	@Autowired
+	private CategoryRepository categoryRepository;
 	
 	// kutsuu index-templatea
 	@GetMapping("/index")
@@ -37,6 +40,7 @@ public class BookController {
 	@GetMapping("/addbook")
 	public String getBookform(Model model) {
 		model.addAttribute("book", new Book()); // välitetään tyhjä kirja-olio uuden kirjan tallentamista varten
+		model.addAttribute("categories", categoryRepository.findAll()); // välitetään kategorialista
 		model.addAttribute("header", "Add new book"); // välitetään oikea otsikko lomakkeelle
 		return "bookform";
 	}
@@ -45,6 +49,7 @@ public class BookController {
 	@GetMapping("/edit/{id}")
 	public String editBook(@PathVariable("id") Long id, Model model) {
 		model.addAttribute("book", bookRepository.findById(id)); // .findById().get() jos ei model.addAttributen sisällä
+		model.addAttribute("categories", categoryRepository.findAll()); // välitetään myös kategorialista
 		model.addAttribute("header", "Edit book"); // välitetään oikea otsikko lomakkeelle
 		return "bookform";
 	}
