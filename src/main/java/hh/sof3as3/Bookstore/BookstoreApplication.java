@@ -26,16 +26,19 @@ public class BookstoreApplication {
 		return (args) -> {
 			
 			// kategoriat
-			categoryRepository.save(new Category("Scifi"));
-			categoryRepository.save(new Category("Mystery"));
-			categoryRepository.save(new Category("Short story"));
+			Category categ1 = new Category("Scifi");
+			Category categ2 = new Category("Mystery");
+			Category categ3 = new Category("Short story");
+			categoryRepository.save(categ1);
+			categoryRepository.save(categ2);
+			categoryRepository.save(categ3);
 			
 			// kirjat
-			bookRepository.save(new Book("Flow My Tears, The Policeman Said", "Philip K. Dick", 2012, "9781780220413", 8.99));
-			bookRepository.save(new Book("Altered Carbon", "Richard Morgan", 2008, "9780575081246", 10.49));
-			bookRepository.save(new Book("Where the Crawdads Sing", "Delia Owens", 2019, "9781472154668", 13.99));
-			bookRepository.save(new Book("Gone Girl", "Gillian Flynn", 2013, "9780753827666", 11.00));
-			bookRepository.save(new Book("The First Forty-Nine Stories", "Ernest Hemingway", 1995, "9780099339212", 14.29));
+			bookRepository.save(new Book("Flow My Tears, The Policeman Said", "Philip K. Dick", 2012, "9781780220413", 8.99, categ1));
+			bookRepository.save(new Book("Altered Carbon", "Richard Morgan", 2008, "9780575081246", 10.49, categ1));
+			bookRepository.save(new Book("Where the Crawdads Sing", "Delia Owens", 2019, "9781472154668", 13.99, categ2));
+			bookRepository.save(new Book("Gone Girl", "Gillian Flynn", 2013, "9780753827666", 11.00, categ2));
+			bookRepository.save(new Book("The First Forty-Nine Stories", "Ernest Hemingway", 1995, "9780099339212", 14.29, categ3));
 			
 			// testitulostus consoleen
 			System.out.println("------------");
