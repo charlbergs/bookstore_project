@@ -41,6 +41,7 @@ public class BookstoreApplication {
 			bookRepository.save(new Book("The First Forty-Nine Stories", "Ernest Hemingway", 1995, "9780099339212", 14.29, categ3));
 			
 			// testitulostus consoleen
+			// vaihda system.out.println log.info() ks esim
 			System.out.println("------------");
 			System.out.println("Categories:");
 			List<Category> categories = (List<Category>) categoryRepository.findAll();

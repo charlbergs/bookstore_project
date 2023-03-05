@@ -14,7 +14,7 @@
 		<p>Publishing year: <input type="number" min="0" max="9999" th:field="${book.year}" /></p>
 		<p>Price: <input type="text" size="4" th:field="${book.price}" /></p>
 		<label for="categorylist">Category</label>
-		<select id="categorylist" th:field="*{category}">
+		<select id="categorylist" th:field="${book.category}">
        		<option th:each="category: ${categories}" th:value="${category.categoryid}" th:text="${category.name}"></option>
     	</select>
 		<input type="submit" value="Save"/> <input type="reset" value="Reset" />

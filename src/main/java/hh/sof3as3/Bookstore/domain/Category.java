@@ -2,6 +2,8 @@ package hh.sof3as3.Bookstore.domain;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -19,6 +21,7 @@ public class Category {
 	private String name;
 	// luodaan viiteavainattribuutti (book)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category") // cascadetype.all: jos kategoria poistetaan niin myös sen kirjat poistetaan, mappedby: sama nimi kuin se jolla category-entiteetti esitellään book-luokassa
+	@JsonIgnoreProperties("category") // blokataan category-attribuutti jotta vältetään loputon loop
 	private List<Book> books;
 	
 	// konstruktorit
