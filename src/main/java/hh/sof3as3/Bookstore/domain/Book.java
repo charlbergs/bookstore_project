@@ -18,7 +18,7 @@ public class Book {
 	// generoidaan id-arvo pääavaimeksi
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long id;
+	private Long id;
 	private String title;
 	private String author;
 	@Column(name="publishing_year") // year on varattu sana, joten muutetaan sarakkeen nimi
@@ -43,16 +43,6 @@ public class Book {
 	}
 	// parametrillinen
 	public Book(String title, String author, int year, String isbn, double price, Category category) {
-		this.title = title;
-		this.author = author;
-		this.year = year;
-		this.isbn = isbn;
-		this.price = price;
-		this.category = category;
-	}
-	// parametrillinen olemassaolevan id:n kanssa (edit)
-	public Book(Long id, String title, String author, int year, String isbn, double price, Category category) {
-		this.id = id;
 		this.title = title;
 		this.author = author;
 		this.year = year;

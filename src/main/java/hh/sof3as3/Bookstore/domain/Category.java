@@ -17,7 +17,7 @@ public class Category {
 	// generoidaan id-arvo pääavaimeksi
 	@Id
 	@GeneratedValue(strategy=GenerationType.AUTO)
-	private long categoryid;
+	private Long categoryid;
 	private String name;
 	// luodaan viiteavainattribuutti (book)
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "category") // cascadetype.all: jos kategoria poistetaan niin myös sen kirjat poistetaan, mappedby: sama nimi kuin se jolla category-entiteetti esitellään book-luokassa
@@ -33,10 +33,10 @@ public class Category {
 	}
 	
 	// getterit ja setterit
-	public long getCategoryid() {
+	public Long getCategoryid() {
 		return categoryid;
 	}
-	public void setCategoryid(long categoryid) {
+	public void setCategoryid(Long categoryid) {
 		this.categoryid = categoryid;
 	}
 	public String getName() {
