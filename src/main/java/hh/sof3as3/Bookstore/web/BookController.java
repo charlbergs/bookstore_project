@@ -80,7 +80,7 @@ public class BookController {
 	}
 	
 	// poisto, GET: poistaa kirjan tietokannasta id:n avulla
-	@PreAuthorize("hasRole('ADMIN')") // vain admin-roolin käyttäjä pystyy poistamaan
+	@PreAuthorize("hasAuthority('ADMIN')") // vain admin-roolin käyttäjä pystyy poistamaan
 	@GetMapping("/delete/{id}")
 	public String deleteBook(@PathVariable("id") Long id) {
 		bookRepository.deleteById(id);

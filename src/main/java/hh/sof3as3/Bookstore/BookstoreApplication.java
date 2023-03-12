@@ -11,6 +11,8 @@ import hh.sof3as3.Bookstore.domain.Book;
 import hh.sof3as3.Bookstore.domain.BookRepository;
 import hh.sof3as3.Bookstore.domain.Category;
 import hh.sof3as3.Bookstore.domain.CategoryRepository;
+import hh.sof3as3.Bookstore.domain.User;
+import hh.sof3as3.Bookstore.domain.UserRepository;
 
 @SpringBootApplication
 public class BookstoreApplication {
@@ -22,7 +24,7 @@ public class BookstoreApplication {
 	// commandlinerunner: käynnistettäessä luodaan dataa tietokantaan
 	// ja testitulostetaan consoleen (kateogriat ja kirjat)
 	@Bean
-	public CommandLineRunner demo (CategoryRepository categoryRepository, BookRepository bookRepository) {
+	public CommandLineRunner demo (CategoryRepository categoryRepository, BookRepository bookRepository, UserRepository userRepository) {
 		return (args) -> {
 			
 			// kategoriat
@@ -55,6 +57,13 @@ public class BookstoreApplication {
 				System.out.println(book.toString());
 			}
 			System.out.println();
+			
+			// luodaan testikäyttäjiä ja lisätään tietokantaan
+			User user1 = new User("user", "$2a$10$1YycEEHYllghQPRKCykDpekEgvY7Ky1ZOoo48k5qvrtrVZf9tp62m", "user@bookstore.com", "USER");
+			User user2 = new User("admin", "$2a$10$nVppraguSfHLq.epaz7dtu62maYQICK6vE9IQigV5oiSgat8u9oXK", "admin@bookstore.com", "ADMIN");
+			userRepository.save(user1);
+			userRepository.save(user2);
+			
 		};
 	}
 	
