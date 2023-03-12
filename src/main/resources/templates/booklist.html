@@ -1,12 +1,25 @@
 <!DOCTYPE HTML>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
 	<title>Bookstore</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 	<link type="text/css" rel="stylesheet" href="/css/bootstrap.min.css" th:href="@{/css/bootstrap.min.css}" />
 </head>
 <body>
-	<h1>Books</h1>
+	<div class="container">
+	<div class="row" style="padding:20px">
+	<div class="col">
+		<h1>Books</h1>
+	</div>
+	<div class="col-6" style="text-align:center">
+		<h5>Welcome, <span sec:authentication="name" style="font-weight:bold"></span>!</h5>
+	</div>
+	<div class="col" style="text-align:right">
+		<form th:action="@{/logout}" method="post">
+			<input type="submit" value="Sign Out" class="btn btn-sm btn-danger"></input>
+		</form>
+	</div>
+	</div>
 	<table class="table table-striped" style="text-align:left;width:100%;">
 		<tr>
 			<th>Title</th>
@@ -15,7 +28,7 @@
 			<th>ISBN</th>
 			<th>Price</th>
 			<th>Category</th>
-			<th></th>
+			<th sec:authorize="hasRole('ADMIN')"></th>
 			<th></th>
 		</tr>
 
@@ -26,11 +39,13 @@
 			<td th:text=${book.isbn}></td>
 			<td th:text=${book.price}></td>
 			<td th:text="${book.category} ? ${book.category.name} : ''"></td>
-			<td><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
+			<!-- piilotetaan poistopainike muilta kuin admin-roolin käyttäjiltä -->
+			<td sec:authorize="hasRole('ADMIN')"><a class="btn btn-danger" th:href="@{/delete/{id}(id=${book.id})}">Delete</a></td>
 			<td><a class="btn btn-secondary" th:href="@{/edit/{id}(id=${book.id})}">Edit</a></td>
 		</tr>
 	</table>
 	<a class="btn btn-success" href="/addbook">Add book</a>
+	</div>
 	
 </body>
 </html>
