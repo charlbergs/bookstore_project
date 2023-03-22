@@ -99,7 +99,7 @@ public class Book {
 	// toString
 	@Override
 	public String toString() {
-		return "id: " + id + ", title: " + title + ", author: " + author + ", year: " + year + ", isbn: " + isbn + ", price: " + price + " €, category: " + category.getName();
+		return "id: " + id + ", title: " + title + ", author: " + author + ", year: " + year + ", isbn: " + isbn + ", price: " + price + " €, category: " + ((category == null) ? "" : category.getName());
 	}
 	
 	
